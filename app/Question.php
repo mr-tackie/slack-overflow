@@ -3,14 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Str;
 
 class Question extends Model
 {
     //
     protected $fillalble = ["title", "body"];
 
-    public function setSlugAttribute(){
-        $this->slug = str_slug($this->title);
+    public function setTitleAttribute($value){
+        $this->attributes["title"] = $value;
+        $this->attributes["slug"] = Str::kebab($value);
     }
 
     public function user(){
